@@ -1,0 +1,28 @@
+# Matrix Rotation (Easy)
+import sys
+test_cases = open(sys.argv[1], 'r')
+for test in test_cases:
+    test = test.strip().split()
+    m = int(len(test)**0.5)
+    d = [0] * m
+    nl = list()
+    for j in range(m):
+        nl.append(list(d))
+    c = 0
+    for i in range(m):
+        for j in range(m):
+            nl[i][j] = test[c]
+            c += 1
+    dp = [0] * m
+    nlp = list()
+    for j in range(m):
+        nlp.append(list(dp))
+    for x in range(m):
+        for y in range(m):
+           nlp[x][y] = nl[y][m-x-1]
+    rs = ""
+    for p in range(m - 1, -1, -1):
+        for q in range(m - 1, -1, -1):
+            rs += nlp[p][q] + " "
+    print rs
+test_cases.close()
