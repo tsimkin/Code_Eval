@@ -1,0 +1,44 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+coldic = {"a":1, "b":2, "c":3, "d":4, "e":5, "f":6,
+          "g":7, "h":8}
+revdict = dict((coldic[k], k) for k in coldic)
+
+def retlist(col, row):
+    rl = []
+    col = int(col)
+    row = int(row)
+    if col > 2:
+        if row > 1:
+            rl.append(revdict[col - 2]+str(row-1))
+        if row < 8:
+            rl.append(revdict[col - 2]+str(row+1))
+    if col > 1:
+        if row > 2:
+            rl.append(revdict[col - 1]+str(row-2))
+        if row < 7:
+            rl.append(revdict[col - 1]+str(row+2))
+    if col < 7:
+        if row > 1:
+            rl.append(revdict[col + 2]+str(row-1))
+        if row < 8:
+            rl.append(revdict[col + 2]+str(row+1))
+    if col < 8:
+        if row > 2:
+            rl.append(revdict[col + 1]+str(row-2))
+        if row < 7:
+            rl.append(revdict[col + 1]+str(row+2))        
+    return rl
+
+for test in test_cases:
+    test = test.strip()
+    mcol = test[0]
+    mrow = test[1]
+    ml = retlist(coldic[mcol], mrow)
+    ml.sort()
+    for elem in ml:
+        print elem,
+    print
+test_cases.close()
+    
