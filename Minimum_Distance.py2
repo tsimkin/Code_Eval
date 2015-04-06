@@ -1,0 +1,18 @@
+def median(num_list):
+    num_list.sort()
+    middle = len(num_list) / 2
+    if len(num_list) % 2 == 0:
+        med = (num_list[middle] + num_list[middle - 1]) / 2.0
+    else:
+        med = num_list[middle]
+    return med
+
+for test in test_cases:
+    test = test.strip().split(' ')
+    test = [int(i) for i in test]
+    test = test[1:]
+    test_med = median(test)
+    msum = 0
+    for item in test:
+        msum += abs(item - test_med)
+    print int(msum)
