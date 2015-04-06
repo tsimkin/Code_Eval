@@ -1,0 +1,37 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+new_cases = []
+for test in test_cases:
+    test = test.strip()
+    new_cases.append(test)
+tot_ret = []
+for sect in range(len(new_cases)):
+    if sect == 0:
+        if 'C' in new_cases[sect]:
+            start_point = new_cases[sect].find('C')
+        else:
+            start_point = new_cases[sect].find('_')
+        new_str = str(new_cases[sect])[:start_point] + '|' + str(new_cases[sect])[start_point + 1:]
+        tot_ret.append(new_str)
+    else:
+        if new_cases[sect][start_point - 1] == 'C':
+            start_point -= 1
+            rep_str = "/"
+        elif new_cases[sect][start_point] == 'C':
+            rep_str = "|"
+        elif new_cases[sect][start_point + 1] == 'C':
+            start_point += 1
+            rep_str = "\\"
+        elif new_cases[sect][start_point - 1] == '_':
+            start_point -= 1
+            rep_str = "/"
+        elif new_cases[sect][start_point] == '_':
+            rep_str = "|"
+        elif new_cases[sect][start_point + 1] == '_':
+            start_point += 1
+            rep_str = "\\"
+        new_str = str(new_cases[sect])[:start_point] + rep_str + str(new_cases[sect])[start_point + 1:]
+        tot_ret.append(new_str)
+for line in tot_ret:
+    print line
+test_cases.close()
