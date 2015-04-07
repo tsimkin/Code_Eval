@@ -1,0 +1,22 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+def rev_lst(lst, amt):
+    if len(lst) < amt:
+        return lst
+    f_part, rest = lst[:amt], lst[amt:]
+    f_part.reverse()
+    return f_part + rev_lst(rest, amt)
+
+for test in test_cases:
+    nums, rev_amt = test.strip().split(';')
+    nums = nums.split(',')
+    nums = [int(i) for i in nums]
+    rev_amt = int(rev_amt)
+    rev_ans = rev_lst(nums, rev_amt)
+    ans_str = ""
+    for elem in rev_ans:
+        ans_str = ans_str + str(elem) + ','
+    print ans_str[:-1]
+    
+test_cases.close()
