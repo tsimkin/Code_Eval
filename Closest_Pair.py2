@@ -1,0 +1,30 @@
+## Not working fast enough in CodeEval
+
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+def dist_bw_pts(x1, y1, x2, y2):
+    return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5
+
+def shortest_dist(list1):
+    shortest = float('Inf')
+    for idx in range(len(list1) - 1):
+        for jdx in range(idx + 1, len(list1)):
+            if dist_bw_pts(list1[idx][0], list1[idx][1], 
+                           list1[jdx][0], list1[jdx][1]) < shortest:
+                shortest = dist_bw_pts(list1[idx][0], list1[idx][1], 
+                                       list1[jdx][0], list1[jdx][1])
+    return shortest
+pts_lst = []
+for test in test_cases:
+    test = test.strip().split(' ')
+    test = [int(i) for i in test]
+    if test[0] == 0 and len(test) == 1:
+        print '%0.4f' % (shortest_dist(pts_lst))
+        pts_lst = []
+    elif len(test) == 1:
+        pass
+    else:
+        pts_lst.append(test)
+        
+test_cases.close()
