@@ -1,0 +1,26 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+for test in test_cases:
+    sent, substr = test.strip().split(',')
+    if '*' in substr:
+        sspot = substr.find('*')
+        if substr[sspot - 1] == '\\':
+            search_str = substr[:sspot - 1] + substr[sspot:]
+            ret_bool = search_str in sent
+        else:
+            sch_str1 = substr[:sspot]
+            sch_str2 = substr[sspot + 1:]
+            if sch_str1 in sent:
+                new_pos = sent.find(sch_str1) + len(sch_str1)
+                ret_bool = sch_str2 in sent[new_pos:]
+            else:
+                ret_bool = False
+    else:
+        ret_bool = substr in sent
+    if ret_bool:
+        print "true"
+    else:
+        print "false"
+
+test_cases.close()
