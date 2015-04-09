@@ -1,0 +1,16 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+all_lets = [chr(ord('a') + i) for i in range(26)]
+
+for test in test_cases:
+    test = test.strip()
+    test = test.lower()
+    ret_str = ''
+    for let in all_lets:
+        if let not in test:
+            ret_str += let
+    if len(ret_str) == 0:
+        print "NULL"
+    else:
+        print ret_str
+test_cases.close()
