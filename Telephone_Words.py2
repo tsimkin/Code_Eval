@@ -1,0 +1,29 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+nummap = [[0, ['0']],[1,['1']],[2,['a','b','c']],[3,['d','e','f']],
+          [4,['g','h','i']],[5,['j','k','l']],[6,['m','n','o']],
+          [7,['p','q','r','s']],[8,['t','u','v']],[9,['w','x','y','z']]]
+
+def pwords(numstr):
+    if len(numstr) == 1:
+        for item in nummap[numstr[0]][1]:
+            yield item
+    else:
+        for item2 in nummap[numstr[0]][1]:
+            for word in pwords(numstr[1:]):
+                yield item2 + word
+
+for test in test_cases:
+    test = test.strip()
+    dlist = [int(i) for i in test]
+    ret_lst = []
+    for iter in pwords(dlist):
+        ret_lst.append(iter)
+    ret_lst.sort()
+    pstr = ''
+    for item in ret_lst:
+        pstr = pstr + item + ','
+    print pstr[:-1]
+
+test_cases.close()
