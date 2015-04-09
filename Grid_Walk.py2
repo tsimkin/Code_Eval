@@ -29,3 +29,6 @@ while boundary_list:
             visited.append(neighbor)
             count += 1
 print count
+"""
+Right answer is 102485.  Not sure why yet...
+"""
