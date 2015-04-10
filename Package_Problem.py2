@@ -1,0 +1,35 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+def find_best(limit, set_list):
+    set_list.sort(key = lambda x: x[2])
+    set_list.reverse()
+    tot = 0
+    ret_lst = []
+    for item in set_list:
+        if (tot + item[1]) <= float(limit):
+            ret_lst.append(item[0])
+            tot += item[1]
+    ret_lst.sort()
+    return ret_lst
+
+for test in test_cases:
+    limit, sets = test.strip().split(" : ")
+    sets = sets.split(' ')
+    for idx in range(len(sets)):
+        temp_case = sets[idx][1:-1]
+        set_list = temp_case.split(',')
+        set_list[2] = int(set_list[2][1:])
+        set_list[0] = int(set_list[0])
+        set_list[1] = float(set_list[1])
+        sets[idx] = set_list
+    my_ret = find_best(limit, sets)
+    if len(my_ret) == 0:
+        ret_str = "-,"
+    else:
+        ret_str = ""
+        for mem in my_ret:
+            ret_str = ret_str + str(mem) + ","
+    print ret_str[:-1]
+    
+test_cases.close()
