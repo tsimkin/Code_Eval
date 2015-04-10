@@ -1,0 +1,23 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+for test in test_cases:
+    test = test.strip().split(';')
+    for idx in range(len(test)):
+        test[idx] = test[idx].split('-')
+    tdic = dict(test)
+    i = 0
+    case = "BEGIN"
+    found = False
+    while i < len(test) and case != "END":
+#        print case, tdic[case], i
+        case = tdic[case]
+        if case == 'END' and i == len(test) - 1:
+            found = True
+        i += 1
+    if found:
+        print "GOOD"
+    else:
+        print "BAD"
+        
+test_cases.close()
