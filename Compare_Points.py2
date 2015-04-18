@@ -1,0 +1,21 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+for test in test_cases:
+    cases = test.strip().split(" ")
+    cases = [int(x) for x in cases]
+    if cases[0] == cases[2] and cases[1] == cases[3]:
+        ret_str = "here"
+    else:
+        ret_str = ""
+    if cases[1] < cases[3]:
+        ret_str += "N"
+    elif cases[1] > cases[3]:
+        ret_str += "S"
+    if cases[0] < cases[2]:
+        ret_str += "E"
+    elif cases[0] > cases[2]:
+        ret_str += "W"
+    print ret_str
+    
+test_cases.close()
