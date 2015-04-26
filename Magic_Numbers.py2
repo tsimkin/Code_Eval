@@ -1,0 +1,38 @@
+"""
+Currently give me a 20%
+"""
+
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+def is_magic(chk_num):
+    chk_str = str(chk_num)
+    # Check for repeated digits
+    if len(chk_str) != len(set(chk_str)):
+        return False
+    # Check for visiting every number
+    count = 1
+    first_num = int(chk_str[0])
+    next_num = int(chk_str[first_num % len(chk_str)])
+    while count <= len(chk_str) and next_num != int(chk_str[0]):
+        #print "f, n before:", first_num, next_num, "count:", count
+        first_num, next_num = next_num, int(chk_str[(first_num + next_num) % len(chk_str)])
+        #print "f, n after:", first_num, next_num, "count:", count; print
+        count += 1
+    return count == len(chk_str) and next_num == int(chk_str[0])
+
+for test in test_cases:
+    test = test.strip().split(" ")
+    test = [int(i) for i in test]
+    ret_list = []
+    for a_num in range(test[0], test[1] + 1):
+        if is_magic(a_num):
+            ret_list.append(a_num)
+    if len(ret_list) == 0:
+        print -1
+    else:
+        for each_val in ret_list:
+            print each_val,
+        print
+        
+test_cases.close()
