@@ -1,0 +1,45 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+dir_list = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+
+for test in test_cases:
+    test = test.strip().split(';')
+    nrows = int(test[0])
+    mcols = int(test[1])
+    data_list = test[2].split(' ')
+    mmat = []
+    visited = []
+    final = []
+    for row in range(nrows):
+        temp_list = []
+        vis_temp = []
+        for col in range(mcols):
+            temp_list.append(data_list[row * mcols + col])
+            vis_temp.append(0)
+        mmat.append(temp_list)
+        visited.append(vis_temp)
+    dir_idx = 0
+    current_dir = dir_list[dir_idx]
+    cur_cell = [0,0]
+    count = 0
+    while count < nrows * mcols:
+        final.append(mmat[cur_cell[0]][cur_cell[1]])
+        visited[cur_cell[0]][cur_cell[1]] = 1
+        row_check = (cur_cell[0] + current_dir[0]) not in range(nrows)
+        col_check = cur_cell[1] + current_dir[1] not in range(mcols)
+        try:
+            visit_check = visited[cur_cell[0] + current_dir[0]][cur_cell[1] + current_dir[1]] == 1
+        except:
+            visit_check = True
+        if row_check or col_check or visit_check:
+                dir_idx = (dir_idx + 1) % len(dir_list)
+                current_dir = dir_list[dir_idx]
+        cur_cell[0] += current_dir[0]
+        cur_cell[1] += current_dir[1]
+        count += 1
+    for elem in final:
+        print elem, 
+    print
+    
+test_cases.close()
