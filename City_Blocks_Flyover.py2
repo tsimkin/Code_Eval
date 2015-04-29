@@ -1,0 +1,22 @@
+"""
+Scores 95%
+"""
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+for test in test_cases:
+    streets, avenues = test.strip().split(" ")
+    streets = streets[1:-1].split(",")
+    avenues = avenues[1:-1].split(",")
+    streets = [int(x) for x in streets]
+    avenues = [int(y) for y in avenues]
+    slope = max(avenues)/float(max(streets))
+    crossings = []
+    for street in streets:
+        crossings.append((float(street), street * slope))
+    for ave in avenues:
+        crossings.append((ave / slope, float(ave)))
+    crossings = set(crossings)
+    print len(crossings) - 1
+
+test_cases.close()
