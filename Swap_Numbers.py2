@@ -1,0 +1,15 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+def rev(astr):
+    return astr[-1] + astr[1:-1] + astr[0]
+
+for test in test_cases:
+    wlist = test.strip().split(' ')
+    rlist = [rev(word) for word in wlist]
+    rstr = ""
+    for word in rlist:
+        rstr = rstr + word + " "
+    print rstr[:-1]
+    
+test_cases.close()
