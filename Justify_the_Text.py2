@@ -1,0 +1,42 @@
+"""
+57.89%, for some reason
+"""
+
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+def pstr(init_str):
+    if len(init_str) <= 80:
+        return init_str
+    ret_str = ""
+    str_lst = init_str.split(' ')
+    str_len = [len(word) for word in str_lst]
+    indic = 0
+    sumlen = 0
+    actsum = 0
+    while sumlen <= 80:
+        indic += 1
+        actsum, sumlen = sumlen, sumlen + str_len.pop(0) + 1
+#        print str_lst[:indic - 1]
+#        print
+    addl_spaces = 80 - (actsum - 1)
+    space_for_spaces = indic - 2
+    base_spaces = addl_spaces / space_for_spaces + 1
+    rem_spaces = addl_spaces % space_for_spaces
+#    print "base_spaces, rem_spaces:",base_spaces, rem_spaces
+    spc_list = [' ' * base_spaces] * space_for_spaces
+    for x in range(rem_spaces):
+        spc_list[x] += ' '
+    spc_list.append('\n')
+    for idx in range(indic - 1):
+#        print ret_str
+        ret_str += str_lst[idx]
+        ret_str += spc_list[idx]
+    return ret_str + pstr(init_str[actsum:])
+
+
+for test in test_cases:
+    test = test.strip()
+    print pstr(test)
+    
+test_cases.close()
