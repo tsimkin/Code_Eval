@@ -1,0 +1,29 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+def spots_bw(start, end, dist, s_buf = 6, e_buf = 6):
+    return max(((end - e_buf - s_buf - start) / dist + 1), 0)
+
+for test in test_cases:
+    test = test.strip().split(' ')
+    length = int(test.pop(0))
+    dist = int(test.pop(0))
+    num_bats = int(test.pop(0))
+    locs = [int(i) for i in test]
+    locs.append(0)
+    locs.append(length)
+    locs.sort()
+    bats = 0
+    for idx in range(len(locs) - 1):
+        if locs[idx] == 0:
+            sbuf = 6
+        else:
+            sbuf = dist
+        if locs[idx + 1] == length:
+            ebuf = 6
+        else:
+            ebuf = dist
+        bats += spots_bw(locs[idx], locs[idx + 1], dist, sbuf, ebuf)
+    print bats
+    
+test_cases.close()
