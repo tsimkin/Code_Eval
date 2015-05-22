@@ -1,0 +1,27 @@
+"""
+Gets a 97.5 %.  I think this is an edge case issue (handled for the second letter, but not the first)
+"""
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+def trans_num(num):
+    # 'A' is chr(65)
+    return chr(num % 26 + 64 if num % 26 != 0 else 90)
+
+def get_col_name(num):    
+    ret_str = ""
+    if num > 26 ** 2:
+        ret_str += trans_num(num // 26 ** 2)
+    if num > 26:
+        if num % 26 == 0:
+            ret_str += trans_num((num % 26 ** 2) // 26 - 1)
+        else:
+            ret_str += trans_num((num % 26 ** 2) // 26)
+    ret_str += trans_num(num % 26)
+    return ret_str
+
+for test in test_cases:
+    test = int(test.strip())
+    print get_col_name(test)
+
+test_cases.close()
