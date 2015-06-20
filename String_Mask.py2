@@ -1,0 +1,17 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+def new_word(word, mask):
+    ret_str = ""
+    for idx in range(len(word)):
+        if mask[idx] == "1":
+            ret_str += word[idx].upper()
+        else:
+            ret_str += word[idx].lower()
+    return ret_str
+
+for test in test_cases:
+    word, mask = test.strip().split(" ")
+    print new_word(word, mask)
+    
+test_cases.close()
