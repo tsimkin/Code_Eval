@@ -1,0 +1,18 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+def wordstar(word, length):
+    ret_str = ""
+    for pos in range(length):
+        ret_str = ret_str + "*" * pos + word[pos] + " "
+    return ret_str[:-1]
+        
+
+for test in test_cases:
+    words = test.strip().split(' ')
+    wlen = [len(word) for word in words]
+    max_len = max(wlen)
+    idx = wlen.index(max_len)
+    print wordstar(words[idx], max_len)
+    
+test_cases.close()
