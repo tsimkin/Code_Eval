@@ -1,0 +1,11 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+for test in test_cases:
+    test = test.strip()
+    ret_val = 0
+    if len(test) > 4:
+        for idx in range(len(test) - 4):
+            if test[idx:idx + 5] == "<--<<" or test[idx:idx + 5] == ">>-->":
+                ret_val += 1
+    print ret_val
+test_cases.close()
