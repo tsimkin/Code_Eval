@@ -1,0 +1,23 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+LETTERS = []
+for i in range(65,91):
+    LETTERS.append(chr(i))
+for j in range(97,123):
+    LETTERS.append(chr(j))
+
+for test in test_cases:
+    test = test.strip()
+    nw = ""
+    for let in test:
+        if let in LETTERS:
+            nw += let
+        else:
+            nw += " "
+    ns = nw.lower().split()
+    for word in ns:
+        print word,
+    print
+    
+test_cases.close()
