@@ -1,0 +1,16 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+for test in test_cases:
+    test = test.strip().split(' | ')
+    row = [[int(i) for i in x.split(' ')] for x in test]
+    cols = len(row[0])
+    for col in range(cols):
+        colMax = None
+        for a_row in range(len(row)):
+            if row[a_row][col] > colMax:
+                colMax = row[a_row][col]
+        print colMax,
+    print
+    
+test_cases.close()
