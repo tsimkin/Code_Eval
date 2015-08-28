@@ -1,0 +1,29 @@
+import sys
+test_cases = open(sys.argv[1], 'r')
+
+def cont(word, tar):
+    word = list(word)
+    popped = []
+    for let in tar:
+        
+        if let in word:
+            word.remove(let)
+            popped.append(let)
+    if len(popped) == len(tar):
+        return True
+    return False
+
+for test in test_cases:
+    wines, letts = test.strip().split(' | ')
+    wines = wines.split(' ')
+    rl = []
+    for wine in wines:
+        if cont(wine, letts):
+            rl.append(wine)
+    if len(rl) == 0:
+        print 'False'
+    else:
+        for word in rl:
+            print word,
+        print
+test_cases.close()
